@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masonry Tab Manager</title>
+  <link rel="stylesheet" href="manager.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-content">
+        <h1 class="title">
+          <img src="assets/icons/icon32.png" alt="Extension Icon" class="title-icon">
+          Masonry Tab Manager
+        </h1>
+        <div class="header-actions">
+          <button id="refreshBtn" class="btn btn-secondary" title="Refresh">
+            <span class="icon">🔄</span>
+            Refresh
+          </button>
+          <button id="newWindowBtn" class="btn btn-primary" title="New Window">
+            <span class="icon">➕</span>
+            New Window
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="search-bar-container">
+        <input type="text" id="search-bar" class="search-field" placeholder="Search tabs by URL...">
+      </div>
+      
+      <div id="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading windows and tabs...</p>
+      </div>
+
+      <div id="error" class="error-state hidden">
+        <div class="error-icon">⚠️</div>
+        <h2>Error Loading Windows</h2>
+        <p class="error-message"></p>
+        <button id="retryBtn" class="btn btn-primary">Try Again</button>
+      </div>
+
+      <div id="content" class="content hidden">
+        <div class="stats-bar">
+          <div class="stats">
+            <span id="windowCount" class="stat-item">0 windows</span>
+            <span id="tabCount" class="stat-item">0 tabs</span>
+          </div>
+          <div class="view-options">
+            <button id="sendToNewWindowBtn" class="btn btn-primary btn-small" style="display: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Back tab -->
+                <path d="M3 8 L3 18 C3 19.1 3.9 20 5 20 L15 20 C16.1 20 17 19.1 17 18 L17 12" stroke-opacity="0.6"/>
+                <path d="M3 8 L8 8 C8.5 8 9 7.5 9 7 L9 6 C9 5.5 9.5 5 10 5 L15 5 C15.5 5 16 5.5 16 6 L16 7 C16 7.5 16.5 8 17 8 L17 8" stroke-opacity="0.6"/>
+                
+                <!-- Front tab -->
+                <path d="M7 4 L7 14 C7 15.1 7.9 16 9 16 L19 16 C20.1 16 21 15.1 21 14 L21 8"/>
+                <path d="M7 4 L12 4 C12.5 4 13 3.5 13 3 L13 2 C13 1.5 13.5 1 14 1 L19 1 C19.5 1 20 1.5 20 2 L20 3 C20 3.5 20.5 4 21 4 L21 4"/>
+                
+                <!-- Plus symbol to indicate duplication -->
+                <circle cx="19" cy="12" r="3" fill="currentColor" stroke="none"/>
+                <path d="M18 12 L20 12 M19 11 L19 13" stroke="white" stroke-width="1.5"/>
+              </svg>
+              Send to New Window
+            </button>
+            <button id="groupByDomainBtn" class="btn btn-secondary btn-small">
+              <span class="icon">🌐</span>
+              Group by Domain
+            </button>
+          </div>
+        </div>
+
+        <div class="view-size-bar">
+          <div class="size-label">View Size:</div>
+          <div class="size-options">
+            <button id="normalSizeBtn" class="btn btn-secondary btn-small size-btn" data-size="normal">
+              <span class="icon">📏</span>
+              Normal
+            </button>
+            <button id="compactSizeBtn" class="btn btn-secondary btn-small size-btn" data-size="compact">
+              <span class="icon">🗜️</span>
+              Compact
+            </button>
+            <button id="ultraSizeBtn" class="btn btn-secondary btn-small size-btn active" data-size="ultra">
+              <span class="icon">🗜️</span>
+              Ultra
+            </button>
+          </div>
+        </div>
+
+        <div class="view-layout-bar">
+          <div class="layout-label">Layout:</div>
+          <div class="layout-options">
+            <button id="masonryLayoutBtn" class="btn btn-secondary btn-small layout-btn active" data-layout="masonry">
+              <span class="icon">🧱</span>
+              Masonry
+            </button>
+            <button id="listLayoutBtn" class="btn btn-secondary btn-small layout-btn" data-layout="list">
+              <span class="icon">☰</span>
+              List
+            </button>
+            <button id="fullMasonryLayoutBtn" class="btn btn-secondary btn-small layout-btn" data-layout="full-masonry">
+              <span class="icon">⊞</span>
+              Full Masonry
+            </button>
+          </div>
+        </div>
+
+        <div id="windowsContainer" class="windows-container masonry-container">
+          <!-- Windows will be populated here -->
+        </div>
+
+        <div id="dropZone" class="drop-zone hidden">
+          <div class="drop-zone-content">
+            <div class="drop-icon">📁</div>
+            <p>Drop tab here to create new window</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Toast notifications -->
+    <div id="toast" class="toast hidden">
+      <div class="toast-content">
+        <span class="toast-icon"></span>
+        <span class="toast-message"></span>
+      </div>
+    </div>
+
+    <!-- Confirmation modal -->
+    <div id="confirmModal" class="modal hidden">
+      <div class="modal-content">
+        <h3 class="modal-title">Confirm Action</h3>
+        <p class="modal-message"></p>
+        <div class="modal-actions">
+          <button id="modalCancel" class="btn btn-secondary">Cancel</button>
+          <button id="modalConfirm" class="btn btn-danger">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="manager.js"></script>
+  <script src="masonry-layout.js"></script>
+</body>
+</html>
