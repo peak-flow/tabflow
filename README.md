@@ -114,3 +114,7 @@ The extension uses vanilla JavaScript with no build process required. Simply loa
 
 - Chrome/Chromium browsers with Manifest V3 support
 - Requires Chrome 88+ for full feature support
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. You are free to use, modify, and distribute this software in any way you like.
