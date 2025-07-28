@@ -15,6 +15,7 @@ zip -r dist/tabflow.zip . \
   -x "package-extension.sh" \
   -x "STORE_DESCRIPTION.md" \
   -x "README-*.md" \
+  -x "screenshots/*" \
   -x "*.swp" \
   -x "*~" \
   -x "node_modules/*" \

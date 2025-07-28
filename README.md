@@ -2,6 +2,20 @@
 
 A Chrome extension for managing browser windows and tabs with a beautiful masonry layout interface.
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/popup.png" alt="TabFlow Popup" width="400" />
+  <br />
+  <em>Quick access popup showing all windows and tabs</em>
+</p>
+
+<p align="center">
+  <img src="screenshots/full-screen-manger.png" alt="TabFlow Manager" width="800" />
+  <br />
+  <em>Full manager interface with masonry layout</em>
+</p>
+
 ## Features
 
 - **Masonry Layout**: Tabs and windows displayed in a Pinterest-style masonry grid that efficiently uses screen space
