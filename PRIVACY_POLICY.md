@@ -49,7 +49,7 @@ We may update this privacy policy from time to time. Any changes will be reflect
 ## Contact
 
 If you have any questions about this privacy policy or TabFlow's data practices, please:
-- Open an issue on our GitHub repository: [Your GitHub URL]
+- Open an issue on our GitHub repository: https://github.com/peak-flow/tabflow/issues
 - Email us at: [Your contact email]
 
 ## Consent

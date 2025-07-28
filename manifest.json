@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "description": "A beautiful masonry-style window and tab manager for Chrome",
   "author": "david abraham",
-  "homepage_url": "https://github.com/yourusername/tabflow",
+  "homepage_url": "https://github.com/peak-flow/tabflow",
   
   "permissions": [
     "tabs",
