@@ -11,12 +11,90 @@ class WindowManager {
         this.selectedTabs = new Set(); // Track selected tab IDs
         
         this.initializeElements();
+        this.init(); // Initialize async operations
+    }
+    
+    async init() {
+        await this.loadPreferences(); // Load saved preferences
+        this.applyPreferences(); // Apply the loaded preferences to UI
         this.updateContainerClass(); // Apply initial CSS classes
         this.setupEventListeners();
         this.loadWindows();
     }
 
-    initializeElements() {
+    async loadPreferences() {
+    try {
+      const result = await chrome.storage.local.get(['viewMode', 'compactMode', 'groupByDomain']);
+      if (result.viewMode) {
+        this.viewMode = result.viewMode;
+      }
+      if (result.compactMode) {
+        this.compactMode = result.compactMode;
+      }
+      if (result.groupByDomain !== undefined) {
+        this.groupByDomain = result.groupByDomain;
+      }
+    } catch (error) {
+      console.error('Failed to load preferences:', error);
+    }
+  }
+
+  async savePreferences() {
+    try {
+      await chrome.storage.local.set({
+        viewMode: this.viewMode,
+        compactMode: this.compactMode,
+        groupByDomain: this.groupByDomain
+      });
+    } catch (error) {
+      console.error('Failed to save preferences:', error);
+    }
+  }
+
+  applyPreferences() {
+    // Apply view mode
+    document.querySelectorAll('.layout-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    switch(this.viewMode) {
+      case 'masonry':
+        this.elements.masonryLayoutBtn?.classList.add('active');
+        break;
+      case 'list':
+        this.elements.listLayoutBtn?.classList.add('active');
+        break;
+      case 'full-masonry':
+        this.elements.fullMasonryLayoutBtn?.classList.add('active');
+        break;
+    }
+    
+    // Apply view size
+    document.querySelectorAll('.size-btn').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    switch(this.compactMode) {
+      case 'normal':
+        this.elements.normalSizeBtn?.classList.add('active');
+        break;
+      case 'compact':
+        this.elements.compactSizeBtn?.classList.add('active');
+        break;
+      case 'ultra':
+        this.elements.ultraSizeBtn?.classList.add('active');
+        break;
+    }
+    
+    // Apply group by domain
+    if (this.groupByDomain) {
+      this.elements.groupByDomainBtn?.classList.add('active');
+      this.elements.groupByDomainBtn.innerHTML = `
+        <span class="icon">🌐</span>
+        Ungroup
+      `;
+    }
+  }
+
+  initializeElements() {
     this.elements = {
       loading: document.getElementById('loading'),
       error: document.getElementById('error'),
@@ -629,6 +707,9 @@ class WindowManager {
     }
     
     this.updateContainerClass();
+    
+    // Save preference
+    this.savePreferences();
   }
 
   setViewLayout(layout) {
@@ -652,6 +733,9 @@ class WindowManager {
     }
     
     this.updateContainerClass();
+    
+    // Save preference
+    this.savePreferences();
   }
 
   toggleCompactMode() {
@@ -681,6 +765,9 @@ class WindowManager {
     
     // Reload windows to apply grouping
     this.loadWindows();
+    
+    // Save preference
+    this.savePreferences();
   }
 
   updateContainerClass() {

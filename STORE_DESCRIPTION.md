@@ -74,7 +74,12 @@ TabFlow respects your privacy:
 
 **tabs**: Required to read tab information (titles, URLs, favicons), move tabs between windows, and manage tab operations. This is core to the extension's functionality.
 
-**storage**: Used to save user preferences locally (view modes, layout settings) so they persist between sessions. No data is sent to external servers.
+**storage**: Used to save your view preferences locally on your device. This includes:
+- Your preferred layout mode (masonry, list, or full masonry)
+- Your preferred view size (normal, compact, or ultra-compact)
+- Whether you prefer tabs grouped by domain
+
+These preferences are stored using Chrome's local storage API and remain on your device. They are never transmitted to any external servers. The storage permission ensures your customized view settings persist between browser sessions, providing a consistent experience every time you use TabFlow.
 
 ## Support
 

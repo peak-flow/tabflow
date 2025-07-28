@@ -4,7 +4,7 @@
   "short_name": "TabFlow",
   "version": "1.0.0",
   "description": "A beautiful masonry-style window and tab manager for Chrome",
-  "author": "Your Name",
+  "author": "david abraham",
   "homepage_url": "https://github.com/yourusername/tabflow",
   
   "permissions": [

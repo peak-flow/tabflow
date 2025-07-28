@@ -16,6 +16,7 @@ zip -r dist/tabflow.zip . \
   -x "STORE_DESCRIPTION.md" \
   -x "README-*.md" \
   -x "screenshots/*" \
+  -x "website/*" \
   -x "*.swp" \
   -x "*~" \
   -x "node_modules/*" \
