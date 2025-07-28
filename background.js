@@ -1,4 +1,4 @@
-// Background script for Masonry Tab Manager
+// Background script for TabFlow
 
 // Security validation
 function isValidMessage(message) {
@@ -175,4 +175,11 @@ chrome.tabs.onAttached.addListener((tabId, attachInfo) => {
 
 chrome.tabs.onDetached.addListener((tabId, detachInfo) => {
   notifyManagerPages('tabDetached', { tabId, detachInfo });
+});
+
+// Handle keyboard shortcuts
+chrome.commands.onCommand.addListener((command) => {
+  if (command === 'open-manager') {
+    chrome.tabs.create({ url: chrome.runtime.getURL('manager.html') });
+  }
 });

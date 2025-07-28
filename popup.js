@@ -1,4 +1,4 @@
-// Popup script for Masonry Tab Manager
+// Popup script for TabFlow
 
 class PopupManager {
   constructor() {

@@ -1,4 +1,4 @@
-# Masonry Tab Manager
+# TabFlow
 
 A Chrome extension for managing browser windows and tabs with a beautiful masonry layout interface.
 
@@ -85,7 +85,7 @@ A Chrome extension for managing browser windows and tabs with a beautiful masonr
 ## File Structure
 
 ```
-masonry-tab-manager/
+tabflow/
 ├── manifest.json          # Extension manifest (Manifest V3)
 ├── background.js          # Service worker for Chrome API operations
 ├── popup.html            # Popup interface HTML
